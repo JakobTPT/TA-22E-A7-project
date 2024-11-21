@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsixEvents", "AsixEvents\AsixEvents.csproj", "{B37FBE85-E217-443A-BE0D-AF92621F321D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B37FBE85-E217-443A-BE0D-AF92621F321D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37FBE85-E217-443A-BE0D-AF92621F321D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37FBE85-E217-443A-BE0D-AF92621F321D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37FBE85-E217-443A-BE0D-AF92621F321D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {944CE951-5E2E-4A54-9CEE-4FF223F755B1}
+	EndGlobalSection
+EndGlobal
