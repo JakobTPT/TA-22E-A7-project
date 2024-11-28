@@ -1,10 +1,10 @@
-﻿namespace InvoiceLine.Models
+﻿namespace AsixEvents.Models
 {
     public class InvoiceLine
     {
         public int Id { get; set; }
         public int InvoiceId { get; set; }
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; } 
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public decimal Total => (UnitPrice * Quantity) - Discount + (UnitPrice * Quantity * VatRate / 100);

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace InvoiceLine.Models
+namespace AsixEvents.Models
 {
     public class Invoice
     {
