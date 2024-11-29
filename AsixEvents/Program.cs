@@ -1,6 +1,6 @@
-using AsixEvents.Data;
 using Microsoft.EntityFrameworkCore;
-using AsixEvents.Data;  // Namespace for ApplicationDbContext
+using AsixEvents.Data;
+using AsixEvents.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
