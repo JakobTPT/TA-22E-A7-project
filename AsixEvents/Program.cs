@@ -1,19 +1,19 @@
+using AsixEvents.Models;
 using Microsoft.EntityFrameworkCore;
 using AsixEvents.Data;
-using AsixEvents.Models;
+using AsixEvents.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure the DbContext to use SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));  // Use connection string
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register other services
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddScoped<CustomerService>();
 
 var app = builder.Build();
 
-// HTTP request pipeline (middleware)
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -31,5 +31,8 @@ app.UseRouting();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

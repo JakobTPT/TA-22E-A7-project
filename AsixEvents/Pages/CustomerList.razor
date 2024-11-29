@@ -1,0 +1,29 @@
+﻿@page "/customers"
+@using AsixEvents.Services
+@inject CustomerService CustomerService
+
+<h3>Customer List</h3>
+
+@if (customers == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var customer in customers)
+        {
+            <li>@customer.Name</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Customer> customers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await CustomerService.GetCustomersAsync();
+    }
+}
+

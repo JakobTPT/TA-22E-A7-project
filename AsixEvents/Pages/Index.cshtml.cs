@@ -1,19 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AsixEvents.Pages;
-
-public class IndexModel : PageModel
+namespace AsixEvents.Pages
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public class IndexModel : PageModel
     {
-        _logger = logger;
-    }
-
-    public void OnGet()
-    {
-
+        public void OnGet()
+        {
+        }
     }
 }
