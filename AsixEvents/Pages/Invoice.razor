@@ -1,0 +1,166 @@
+﻿@page "/invoice/{id:int}"
+@inject CustomerService CustomerService
+@inject InvoiceService InvoiceService
+
+@using AsixEvents.Services
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private AsixEvents.Models.Invoice invoice;
+    private Customer customer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        invoice = await InvoiceService.GetInvoiceByIdAsync(Id);
+        customer = invoice.Customer;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .invoice {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header img {
+                max-width: 150px;
+            }
+
+        .details, .items, .summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .details td, .items th, .items td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            .items th {
+                background-color: #f4f4f4;
+            }
+
+            .summary td {
+                text-align: right;
+            }
+
+            .summary tr:last-child td {
+                font-weight: bold;
+            }
+
+        .payment-method {
+            text-align: center;
+        }
+
+            .payment-method span {
+                padding: 5px 10px;
+                border: 1px solid #ddd;
+                margin: 5px;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <div class="header">
+            <h1>DesignBolts Graphics & Tech</h1>
+            <p>Invoice No: @invoice?.InvoiceNo</p>
+            <p>Date: @invoice?.InvoiceDate.ToShortDateString()</p>
+        </div>
+        <table class="details">
+            <tr>
+                <td>
+                    <strong>To:</strong><br>
+                    @customer?.Name<br>
+                    @customer?.Address<br>
+                    Email: @customer?.Email<br>
+                    Ph: @customer?.Phone
+                </td>
+                <td>
+                    <strong>From:</strong><br>
+                    Alfa Heights<br>
+                    15 Markham, Toronto, Canada<br>
+                    Email: anthony@tribuilders.com<br>
+                    Ph: +01-888-888-88
+                </td>
+            </tr>
+        </table>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Items</th>
+                    <th>Unit Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (invoice?.LineItems != null)
+                {
+                    @foreach (var item in invoice.LineItems)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Product?.ProductName</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Total</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <table class="summary">
+            <tr>
+                <td>SUB TOTAL</td>
+                <td>@invoice?.SubTotal</td>
+            </tr>
+            <tr>
+                <td>TAX RATE @invoice?.TaxRate%</td>
+                <td>@(invoice?.SubTotal * invoice?.TaxRate / 100)</td>
+            </tr>
+            <tr>
+                <td>DISCOUNT @invoice?.Discount%</td>
+                <td>@(invoice?.SubTotal * invoice?.Discount / 100)</td>
+            </tr>
+            <tr>
+                <td>SHIPPING / HANDLING</td>
+                <td>@invoice?.Shipping</td>
+            </tr>
+            <tr>
+                <td>GRAND TOTAL</td>
+                <td>@invoice?.GrandTotal</td>
+            </tr>
+        </table>
+        <div class="payment-method">
+            <span>PAYPAL</span>
+            <span>WIRE</span>
+            <span>CREDIT CARD</span>
+            <span>PAY CHECK</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<InvoiceService>();
 
 var app = builder.Build();
 
